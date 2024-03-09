@@ -27,6 +27,11 @@ app.get("/students", (req, res) => {
   });
 });
 
+app.use(express.json())
+app.post("/students/create", (req, res) => {
+  console.log(req.body)
+  res.send("Student created")
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

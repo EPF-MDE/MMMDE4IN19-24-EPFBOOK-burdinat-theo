@@ -9,7 +9,7 @@ app.get('/', (req, res) => {
 
 
 app.get("/students", (req, res) => {
-  const rowSeparator = "\n";
+  const rowSeparator = "\r\n";
   const cellSeparator = ","; 
   fs.readFile("students.csv", "utf-8", (err, data) => {
     const rows = data.split(rowSeparator);
@@ -29,8 +29,10 @@ app.get("/students", (req, res) => {
 
 app.use(express.json())
 app.post("/students/create", (req, res) => {
-  console.log(req.body)
-  res.send("Student created")
+  console.log(req.body);
+  const csvLine = `\r\n${req.body.name},${req.body.school}`;
+  console.log(csvLine);
+  fs.writeFile("students.csv", csvLine, { flag: "a" }, (err) => { res.send("Student created");});
 })
 
 app.listen(port, () => {

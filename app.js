@@ -1,4 +1,5 @@
 const express = require('express')
+const fs = require('fs')
 const app = express()
 const port = 3000
 
@@ -12,4 +13,8 @@ app.get('/students', function (req, res) {
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
+  fs.readFile('students.csv', 'utf-8', (err, data) => {
+    if (err) throw err;
+    console.log(data);
+  });
   })

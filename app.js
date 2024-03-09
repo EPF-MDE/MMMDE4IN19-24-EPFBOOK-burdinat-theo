@@ -11,6 +11,13 @@ app.get('/students', function (req, res) {
   res.send([{ name: "Théo BURDINAT", school: "EPF"}, { name: "Manon VEDIE", school: "EPF"}, { name: "Juliette TORT", school: "EPF"}, { name: "Martin BOYTCHEV", school: "EPF"}, { name: "Thibaut MORIN", school: "EPF"}, { name: "Arthur BUONANNO", school: "EPF"}, { name: "Gaspard TIRFOIN", school: "EPF"}, { name: "Arnaud CARTON", school: "EPF"}, { name: "Abelle CHARLEMAGNE", school: "EPF"}, { name: "Anne-Zoé KASSIDONIS", school: "EPF"}])
 })
 
+app.get('/studentsfromCSV', function (req, res) {
+  fs.readFile('students.csv', 'utf-8', (err, data) => {
+    if (err) throw err;
+    res.send(data);
+  });
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
   fs.readFile('students.csv', 'utf-8', (err, data) => {

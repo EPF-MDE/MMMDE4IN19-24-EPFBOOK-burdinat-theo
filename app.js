@@ -6,6 +6,9 @@ const port = 3000
 
 app.use(express.json())
 
+app.set("views", "./views");
+app.set("view engine", "ejs");
+
 app.get("/api/students", (req, res) => {
   const rowSeparator = "\r\n";
   const cellSeparator = ","; 
@@ -36,6 +39,27 @@ app.post("/api/students/create", (req, res) => {
 //TP2
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./views/home.html"));
+});
+
+app.get("/students", (req, res) => {
+  const rowSeparator = "\r\n";
+  const cellSeparator = ","; 
+  fs.readFile("students.csv", "utf-8", (err, data) => {
+    const rows = data.split(rowSeparator);
+    const [headerRow, ...contentRows] = rows;
+    const header = headerRow.split(cellSeparator);
+    const students = contentRows.map((row) => {
+      const cells = row.split(cellSeparator);
+      const student = { 
+        [header[0]]: cells[0], 
+        [header[1]]: cells[1], 
+      };
+      return student; 
+    });
+    res.render("students",
+      { students,
+    });
+  });
 });
 
 app.listen(port, () => {

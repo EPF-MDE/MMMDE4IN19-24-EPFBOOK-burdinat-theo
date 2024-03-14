@@ -1,32 +1,27 @@
 const express = require('express');
-const fs = require('fs')
+const { getStudentsFromCsvfile, storeStudentInCsvFile } = require('../csvfile_manipulation');
 const router = express.Router();
 
 router.get("/students", (req, res) => {
-    const rowSeparator = "\r\n";
-    const cellSeparator = ","; 
-    fs.readFile("students.csv", "utf-8", (err, data) => {
-      const rows = data.split(rowSeparator);
-      const [headerRow, ...contentRows] = rows;
-      const header = headerRow.split(cellSeparator);
-      const students = contentRows.map((row) => {
-        const cells = row.split(cellSeparator);
-        const student = { 
-          [header[0]]: cells[0], 
-          [header[1]]: cells[1], 
-        };
-        return student; 
-      });
-      res.send(students); 
-    });
+  getStudentsFromCsvfile((err, students) => {
+    if (err) {
+      console.error(err);
+      res.send("ERROR");
+    }
+    res.send(students);
+  });
 });
   
-  
 router.post("/students/create", (req, res) => {
-    console.log(req.body);
-    const csvLine = `\r\n${req.body.name},${req.body.school}`;
-    console.log(csvLine);
-    fs.writeFile("students.csv", csvLine, { flag: "a" }, (err) => { res.send("Student created");});
+  console.log(req.body);
+  const student = req.body;
+  storeStudentInCsvFile(student, (err, storeResult) => {
+    if (err) {
+      res.status(500).send("error");
+    } else {
+      res.send("ok");
+    }
+  });
 });
 
 module.exports = router;

@@ -1,11 +1,21 @@
 <html> 
-    <head><title>Students</title></head> 
+    <head>
+        <title>
+            Students
+        </title>
+        <link rel="stylesheet" href="/style.css">
+    </head> 
     <body>
-        <h1>Students</h1> 
-        <ul> 
-        <% students.forEach(function(student) { %> 
-            <li><%= student.name %> | <%= student.school %></li> 
-        <%})%> 
-        </ul> 
+        <main>
+            <h1>Students</h1> 
+            <p class="long-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis ullamcorper metus et maximus. Maecenas in magna ac felis finibus porta. Praesent tempus, tellus eu faucibus dapibus, orci eros imperdiet nisl, eget tempor urna arcu at felis. Donec ex eros, luctus et purus vulputate, sagittis feugiat purus. Proin aliquam vitae tellus eu tristique. Nunc lacinia, felis vel varius dignissim, neque metus vestibulum metus, eget consectetur lectus leo quis quam. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In porta ipsum mi, et sodales lacus vestibulum vitae. In vitae dui in velit tincidunt mattis. Etiam diam sem, ultricies at faucibus vel, tempor quis erat. Donec sed dui luctus, pharetra lectus eget, dapibus ante. Donec auctor feugiat enim, sed consequat justo consequat in. Duis feugiat vitae massa nec commodo. Proin luctus eget nisi sed ullamcorper. 
+            </p>
+            <ul> 
+            <% students.forEach(function(student) { %> 
+                <li><%= student.name %> | <%= student.school %></li> 
+            <%})%> 
+            </ul> 
+        </main>
     </body>
 </html>

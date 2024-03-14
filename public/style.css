@@ -1,0 +1,13 @@
+body {
+    background-color:deepskyblue;
+}
+main{
+    margin:auto;
+    max-width: 800px;
+}
+
+@media (max-width: 1000px) {
+    p.long-text {
+      display: none;
+    }
+  }

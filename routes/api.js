@@ -1,9 +1,6 @@
 const express = require('express');
 const fs = require('fs')
 const router = express.Router();
-const app = express()
-
-app.use(express.json())
 
 router.get("/students", (req, res) => {
     const rowSeparator = "\r\n";

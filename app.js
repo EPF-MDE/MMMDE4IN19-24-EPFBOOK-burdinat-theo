@@ -5,6 +5,7 @@ const app = express()
 const port = 3000
 
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
@@ -60,6 +61,17 @@ app.get("/students", (req, res) => {
       { students,
     });
   });
+});
+
+app.get("/students/create", (req, res) => {
+  res.render("create-students");
+});
+
+app.post("/students/create", (req, res) => {
+  console.log(req.body);
+  const csvLine = `\r\n${req.body.name},${req.body.school}`;
+  console.log(csvLine);
+  fs.writeFile("students.csv", csvLine, { flag: "a" }, (err) => { res.send(res.redirect("/students/create?created=1"));});
 });
 
 app.listen(port, () => {

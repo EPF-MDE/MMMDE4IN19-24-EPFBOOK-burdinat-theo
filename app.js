@@ -6,7 +6,7 @@ const port = 3000
 
 app.use(express.json())
 
-app.get("/students", (req, res) => {
+app.get("/api/students", (req, res) => {
   const rowSeparator = "\r\n";
   const cellSeparator = ","; 
   fs.readFile("students.csv", "utf-8", (err, data) => {
@@ -26,7 +26,7 @@ app.get("/students", (req, res) => {
 });
 
 
-app.post("/students/create", (req, res) => {
+app.post("/api/students/create", (req, res) => {
   console.log(req.body);
   const csvLine = `\r\n${req.body.name},${req.body.school}`;
   console.log(csvLine);

@@ -24,4 +24,17 @@ router.post("/students/create", (req, res) => {
   });
 });
 
+router.post("/login", (req, res) => {
+  const token = "FOOBAR";
+  const tokenCookie = {
+    path: "/",
+    httpOnly: true,
+    expires: new Date(Date.now() + 60 * 60* 1000),
+  };
+  res.cookie("auth-token", token, tokenCookie);
+  res.status(200).send("Cookie has been set");
+  console.log(req.cookies);
+});
+
+
 module.exports = router;

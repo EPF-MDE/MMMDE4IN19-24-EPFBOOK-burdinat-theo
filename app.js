@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-const basicAuth = require('express-basic-auth')
+const basicAuth = require('express-basic-auth');
 const bcrypt = require('bcrypt');
+const cookieParser = require('cookie-parser');
 const apiRoute = require('./routes/api');
 const { getFromCsvfile, storeStudentInCsvFile } = require('./csvfile_manipulation');
 const app = express();
@@ -16,6 +17,7 @@ app.use(basicAuth({
   authorizer: authorizer,
   authorizeAsync: true,
 }));
+app.use(cookieParser());
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
@@ -69,8 +71,8 @@ function authorizer(username, password, cb) {
       return bcrypt.compare(password, foundUser.password, cb)
     }
   });
-};
+}
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port} : http://localhost:3000/`)
   })

@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+// const basicAuth = require('express-basic-auth')
 const apiRoute = require('./routes/api');
 const { getStudentsFromCsvfile, storeStudentInCsvFile } = require('./csvfile_manipulation');
 const app = express();
@@ -9,13 +10,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('node_modules/normalize.css'));
+// app.use(basicAuth({
+//   users: { 'admin': 'supersecret' },
+//   challenge: true
+// }))
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
-//TP2
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "./views/home.html"));
+  res.send("Success");
 });
 
 app.get("/students", (req, res) => {

@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const basicAuth = require('express-basic-auth')
+const bcrypt = require('bcrypt');
 const apiRoute = require('./routes/api');
 const { getFromCsvfile, storeStudentInCsvFile } = require('./csvfile_manipulation');
 const app = express();
@@ -59,17 +60,16 @@ function authorizer(username, password, cb) {
       console.error(err);
       return cb(null, false);
     }
-    const foundUser = users.find(user => user.username === username);
+    const foundUser = users.find((user) => {
+      return basicAuth.safeCompare(user.username, username);
+    });
     if (!foundUser) {
       return cb(null, false);
-    }
-    if (foundUser.password === password) {
-      return cb(null, true);
     } else {
-      return cb(null, false);
+      return bcrypt.compare(password, foundUser.password, cb)
     }
   });
-}
+};
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

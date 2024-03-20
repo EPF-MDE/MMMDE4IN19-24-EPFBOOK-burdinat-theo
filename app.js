@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-// const basicAuth = require('express-basic-auth')
+const basicAuth = require('express-basic-auth')
 const apiRoute = require('./routes/api');
 const { getStudentsFromCsvfile, storeStudentInCsvFile } = require('./csvfile_manipulation');
 const app = express();
@@ -10,10 +10,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.use(express.static('node_modules/normalize.css'));
-// app.use(basicAuth({
-//   users: { 'admin': 'supersecret' },
-//   challenge: true
-// }))
+app.use(basicAuth({
+  challenge: true,
+  authorizer: authorizer,
+  authorizeAsync: true,
+}));
 
 app.set("views", "./views");
 app.set("view engine", "ejs");
@@ -51,6 +52,13 @@ app.post("/students/create", (req, res) => {
 });
 
 app.use('/api', apiRoute);
+
+function authorizer(username, password, cb) {
+  if (username.startsWith('A') & password.startsWith('secret'))
+      return cb(null, true)
+  else
+      return cb(null, false)
+}
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

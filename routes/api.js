@@ -1,9 +1,9 @@
 const express = require('express');
-const { getStudentsFromCsvfile, storeStudentInCsvFile } = require('../csvfile_manipulation');
+const { getFromCsvfile, storeStudentInCsvFile } = require('../csvfile_manipulation');
 const router = express.Router();
 
 router.get("/students", (req, res) => {
-  getStudentsFromCsvfile((err, students) => {
+  getFromCsvfile("students", (err, students) => {
     if (err) {
       console.error(err);
       res.send("ERROR");

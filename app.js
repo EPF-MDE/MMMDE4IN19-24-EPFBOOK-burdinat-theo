@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const basicAuth = require('express-basic-auth')
 const apiRoute = require('./routes/api');
-const { getStudentsFromCsvfile, storeStudentInCsvFile } = require('./csvfile_manipulation');
+const { getFromCsvfile, storeStudentInCsvFile } = require('./csvfile_manipulation');
 const app = express();
 const port = 3000;
 
@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/students", (req, res) => {
-  getStudentsFromCsvfile((err, students) => {
+  getFromCsvfile("students",(err, students) => {
     if (err) {
       console.error(err);
       res.send("ERROR");
@@ -54,10 +54,21 @@ app.post("/students/create", (req, res) => {
 app.use('/api', apiRoute);
 
 function authorizer(username, password, cb) {
-  if (username.startsWith('A') & password.startsWith('secret'))
-      return cb(null, true)
-  else
-      return cb(null, false)
+  getFromCsvfile("users", (err, users) => {
+    if (err) {
+      console.error(err);
+      return cb(null, false);
+    }
+    const foundUser = users.find(user => user.username === username);
+    if (!foundUser) {
+      return cb(null, false);
+    }
+    if (foundUser.password === password) {
+      return cb(null, true);
+    } else {
+      return cb(null, false);
+    }
+  });
 }
 
 app.listen(port, () => {

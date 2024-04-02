@@ -54,6 +54,10 @@ app.post("/students/create", (req, res) => {
   });
 });
 
+app.get("/students/data", (req, res) => {
+  res.render("students_data");
+});
+
 app.use('/api', apiRoute);
 
 function authorizer(username, password, cb) {

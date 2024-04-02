@@ -12,6 +12,4 @@ document.addEventListener("DOMContentLoaded", function(){
           ]
         }
     });
-    let graph = document.querySelector("div#chart");
-    graph.append(chart.element);
 });

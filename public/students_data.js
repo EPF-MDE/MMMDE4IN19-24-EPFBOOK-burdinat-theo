@@ -61,10 +61,22 @@ document.addEventListener("DOMContentLoaded", function(){
         const healthCounts = Object.values(healthIssueByStressBuster).slice(0, 5);
         const healthCategories = Object.keys(healthIssueByStressBuster).slice(0, 5);
         console.log(healthCounts);
-        const stackedChart = c3.generate({
-            bindto:"#stackedChart",
+        
+        const normalizedHealthCounts = healthCounts.map(healthCount => {
+            const total = healthCount["YES"] + healthCount["NO"];
+            return {
+                "NO": healthCount["NO"] / total * 100,
+                "YES": healthCount["YES"] / total * 100
+            };
+        });
+        
+        const stackedNormalizedChart = c3.generate({
+            bindto:"#stackedNormalizedChart",
             data: {
-                columns: [['No had health issue during lockdown', ...healthCounts.map(healthCount => healthCount["NO"])], ['Had health issue during lockdown', ...healthCounts.map(healthCount => healthCount["YES"])],],
+                columns: [
+                    ['No had health issue during lockdown', ...normalizedHealthCounts.map(h => h["NO"])],
+                    ['Had health issue during lockdown', ...normalizedHealthCounts.map(h => h["YES"])]
+                ],
                 type: 'bar',
                 groups: [['No had health issue during lockdown', 'Had health issue during lockdown']],
             },
@@ -74,6 +86,15 @@ document.addEventListener("DOMContentLoaded", function(){
                     categories: healthCategories,
                 },
             },
+            tooltip: {
+                format: {
+                    value: function (value, ratio, id) {
+                        return value.toFixed(2) + '%'; // Formatting tooltip to show percentage
+                    }
+                }
+            }
         });
+
+        
     });
 });

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "echo": "echo 'HELLO'",
-    "dev": "nodemon -L app.js"
+    "dev": "nodemon -L app.js",
+    "docker": "docker run -d -p 27017:27017 -v ~/data:/data/db mongo"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
     "ejs": "^3.1.9",
     "express": "^4.18.3",
     "express-basic-auth": "^1.2.1",
+    "mongoose": "^8.3.2",
     "normalize.css": "^8.0.1"
   },
   "devDependencies": {

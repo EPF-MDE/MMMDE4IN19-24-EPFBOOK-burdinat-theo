@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const apiRoute = require('./routes/api');
 const { getFromCsvfile, storeStudentInCsvFile } = require('./csvfile_manipulation');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

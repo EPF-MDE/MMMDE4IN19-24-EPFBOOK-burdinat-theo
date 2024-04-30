@@ -3,14 +3,14 @@ const path = require('path');
 const basicAuth = require('express-basic-auth');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
-const mangoose = require('mongoose');
+const mongoose = require('mongoose');
 const apiRoute = require('./routes/api');
-const { getFromCsvfile, storeStudentInCsvFile } = require('./csvfile_manipulation');
+const { getFromCsvfile, storeStudentInCsvFile, getUserFromId } = require('./csvfile_manipulation');
 const StudentModel = require('./models/Student');
 const app = express();
 const port = process.env.PORT || 3000;
 
-mangoose.connect('mongodb://localhost:27017/epfbook');
+mongoose.connect('mongodb://localhost:27017/epfbook');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -74,6 +74,17 @@ app.post("/students/create-in-db", (req, res) => {
 app.get("/students/from-db", async (req, res) => {
   const students = await StudentModel.find({}).exec();
   res.send(students);
+});
+
+app.get('/students/:id', (req, res) => {
+  const id = parseInt(req.params.id)+1;
+  student = getUserFromId(id, (err, student) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.render('student_details', { student });
+    }
+  });
 });
 
 app.use('/api', apiRoute);

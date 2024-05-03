@@ -10,8 +10,6 @@ const StudentModel = require('./models/Student');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const fs = require('fs');
-
 mongoose.connect('mongodb://localhost:27017/epfbook');
 
 app.use(express.json());
@@ -29,7 +27,7 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.send("Success");
+  res.sendFile(path.join(__dirname, "./views/home.html"))
 });
 
 app.get("/students", (req, res) => {

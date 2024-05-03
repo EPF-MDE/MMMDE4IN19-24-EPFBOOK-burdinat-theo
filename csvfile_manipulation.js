@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 
 const getFromCsvfile = (fileName, cb) => {
   const rowSeparator = "\r\n";
@@ -47,8 +48,30 @@ const getUserFromId = (id, cb) => {
   });
 };
 
+const updateUser = (id, name, school, cb) => {
+  const filePath = path.join(__dirname, 'students.csv');
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            return cb('Failed to read students data.');
+        }
+        let lines = data.split('\r\n');
+        if (id <= 0 || id >= lines.length) {
+            return cb('Student not found.');
+        }
+        lines[id] = `${name},${school}`;
+        const updatedContent = lines.join('\r\n');
+        fs.writeFile(filePath, updatedContent, (err) => {
+            if (err) {
+                return cb('Failed to update student.');
+            }
+            return cb(null);
+        });
+    });
+};
+
 module.exports = {
     getFromCsvfile,
     storeStudentInCsvFile,
-    getUserFromId
+    getUserFromId,
+    updateUser
 };

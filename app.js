@@ -5,10 +5,12 @@ const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const apiRoute = require('./routes/api');
-const { getFromCsvfile, storeStudentInCsvFile, getUserFromId } = require('./csvfile_manipulation');
+const { getFromCsvfile, storeStudentInCsvFile, getUserFromId, updateUser } = require('./csvfile_manipulation');
 const StudentModel = require('./models/Student');
 const app = express();
 const port = process.env.PORT || 3000;
+
+const fs = require('fs');
 
 mongoose.connect('mongodb://localhost:27017/epfbook');
 
@@ -82,7 +84,20 @@ app.get('/students/:id', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      res.render('student_details', { student });
+      res.render('student_details', { student, success: req.query.success });
+    }
+  });
+});
+
+app.post('/students/:id', (req, res) => {
+  const id = parseInt(req.params.id)+1;
+  const {name, school} = req.body;
+  updateUser(id, name, school, (err) => {
+    if (err) {
+      console.log(err);
+      res.redirect(`/students/${id-1}?success=false`);
+    } else {
+      res.redirect(`/students/${id-1}?success=true`);
     }
   });
 });

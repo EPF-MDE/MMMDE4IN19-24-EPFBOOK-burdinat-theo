@@ -9,5 +9,23 @@
     <h1>Student Details</h1>
     <p>Name: <%= student.name %></p>
     <p>School: <%= student.school %></p>
+    <form method="POST">
+        <br>
+        <label for="update"><b>Update the profile of the student:</b></label>
+        <br>
+        <br>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="<%= student.name %>" required/>
+        <br>
+        <label for="school">School:</label>
+        <input type="text" id="school" name="school" value="<%= student.school %>" required/>
+        <br>
+        <input type="submit" value="Update">
+    </form>
+    <% if (success === 'true') { %>
+        <script>alert('Student updated successfully!');</script>
+    <% } else if (success === 'false') { %>
+        <script>alert('Student update failed!');</script>
+    <% } %>
 </body>
 </html>

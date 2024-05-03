@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function(){
         console.log(stressBustersCount);
         const counts = Object.values(stressBustersCount).slice(0, 5);
         const categories = Object.keys(stressBustersCount).slice(0, 5);
-        const chart = c3.generate({
+        c3.generate({
             bindto:"#chart",
             data: {
                 columns: [["Stress busters", ...counts]],
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function(){
             },
         });
         console.log(healthIssueCount);
-        const piechart = c3.generate({
+        c3.generate({
             bindto:"#pie",
             data: {
                 columns: Object.entries(healthIssueCount),
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function(){
             };
         });
         
-        const stackedNormalizedChart = c3.generate({
+        c3.generate({
             bindto:"#stackedNormalizedChart",
             data: {
                 columns: [
@@ -88,13 +88,11 @@ document.addEventListener("DOMContentLoaded", function(){
             },
             tooltip: {
                 format: {
-                    value: function (value, ratio, id) {
-                        return value.toFixed(2) + '%'; // Formatting tooltip to show percentage
+                    value: function (value) {
+                        return value.toFixed(2) + '%';
                     }
                 }
             }
         });
-
-        
     });
 });

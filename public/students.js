@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function(event){
+document.addEventListener("DOMContentLoaded", function(){
     let button = document.querySelector('button#create');
     button.addEventListener('click', function(){
         let model = button.getAttribute('data-model');

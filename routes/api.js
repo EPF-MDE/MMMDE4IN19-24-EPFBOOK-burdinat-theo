@@ -18,9 +18,9 @@ router.get("/students", (req, res) => {
 router.post("/students/create", (req, res) => {
   console.log(req.body);
   const student = req.body;
-  storeStudentInCsvFile(student, (err, storeResult) => {
+  storeStudentInCsvFile(student, (err) => {
     if (err) {
-      res.status(500).send("error");
+      res.send("error");
     } else {
       res.send("ok");
     }
@@ -41,11 +41,14 @@ router.post("/login", (req, res) => {
 
 router.post("/students/create-in-db", (req, res) => {
   const student = new StudentModel(req.body);
-  student.save().then((result) => {
-    res.send("Student created successfully");
-  }).catch((err) => {
-    res.send("Error creating student");
-  });
+  student.save()
+    .then(() => {
+      res.redirect("/students/create?created=1");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.redirect("/students/create?error=1");
+    });
 });
 
 router.get("/students/from-db", async (req, res) => {
@@ -55,8 +58,7 @@ router.get("/students/from-db", async (req, res) => {
 
 router.get('/students/:id', (req, res) => {
   const id = parseInt(req.params.id)+1;
-  const id_link = id-1;
-  student = getUserFromId(id, (err, student) => {
+  getUserFromId(id, (err, student) => {
     if (err) {
       res.send(err);
     } else {

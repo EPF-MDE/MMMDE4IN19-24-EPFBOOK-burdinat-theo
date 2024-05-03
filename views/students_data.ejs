@@ -1,20 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Data viz
+            Data viualization
         </title>
+        <link rel="stylesheet" href="/normalize.css">
+        <link rel="stylesheet" href="/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.css">
         <script src='https://d3js.org/d3.v5.min.js'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.js"></script>
         <script src="/students_data.js"></script>
     </head>
     <body>
-        <h1>Top 5 students' stress busters</h1>
-        <div id="chart"></div>
-        <h1>Pie chart for the column "Health issue during lockdown"</h1>
-        <div id="pie"></div>
-        <h1>Cumulative proportional bar plot that show the relationship between the top 5 "Stress busters" and "Health issue during lockdown"</h1>
-        <div id="stackedNormalizedChart"></div>
+        <header>
+            <img src="/EPF Logo + Baseline Negatif sans Fond.png" alt="EPF Logo" id="logo">
+            <nav id="navbar">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/students">Students list (CSV)</a></li>
+                    <li><a href="/students/create">Add a student (CSV)</a></li>
+                    <li><a href="/students/data">Display some plots</a></li>
+                    <li><a href="/students/from-db">Students list (MongoDB)</a></li>
+                    <li><a href="/students/create-in-db">Add a student (MongoDB)</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <h1>Top 5 students' stress busters</h1>
+            <div id="chart"></div>
+            <h1>Pie chart for the column "Health issue during lockdown"</h1>
+            <div id="pie"></div>
+            <h1>Cumulative proportional bar plot that show the relationship between the top 5 "Stress busters" and "Health issue during lockdown"</h1>
+            <div id="stackedNormalizedChart"></div>
+        </main>
     </body>
 </html>

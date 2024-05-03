@@ -3,29 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Details</title>
+    <title><%= student.name %>'s page</title>
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-    <h1>Student Details</h1>
-    <p>Name: <%= student.name %></p>
-    <p>School: <%= student.school %></p>
-    <form method="POST">
-        <br>
-        <label for="update"><b>Update the profile of the student:</b></label>
-        <br>
-        <br>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="<%= student.name %>" required/>
-        <br>
-        <label for="school">School:</label>
-        <input type="text" id="school" name="school" value="<%= student.school %>" required/>
-        <br>
-        <input type="submit" value="Update">
-    </form>
-    <% if (success === 'true') { %>
-        <script>alert('Student updated successfully!');</script>
-    <% } else if (success === 'false') { %>
-        <script>alert('Student update failed!');</script>
-    <% } %>
+    <header>
+        <img src="/EPF Logo + Baseline Negatif sans Fond.png" alt="EPF Logo" id="logo">
+        <nav id="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/students">Students list (CSV)</a></li>
+                <li><a href="/students/create">Add a student (CSV)</a></li>
+                <li><a href="/students/data">Display some plots</a></li>
+                <li><a href="/students/from-db">Students list (MongoDB)</a></li>
+                <li><a href="/students/create-in-db">Add a student (MongoDB)</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Student Details</h1>
+        <p><b>Name: </b><%= student.name %></p>
+        <p><b>School: </b><%= student.school %></p>
+        <form method="POST">
+            <br>
+            <label for="update"><b>Update the profile of the student:</b></label>
+            <br>
+            <br>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" value="<%= student.name %>" pattern="[^,]+" required/>
+            <br>
+            <label for="school">School:</label>
+            <input type="text" id="school" name="school" value="<%= student.school %>" pattern="[^,]+" required/>
+            <br>
+            <input type="submit" value="Update">
+        </form>
+        <% if (success === 'true') { %>
+            <script>alert('Student updated successfully!');</script>
+        <% } else if (success === 'false') { %>
+            <script>alert('Student update failed!');</script>
+        <% } %>
+        <script>window.history.pushState({}, document.title, window.location.pathname);</script>
+    </main>
 </body>
 </html>

@@ -83,11 +83,12 @@ app.get("/students/from-db", async (req, res) => {
 
 app.get('/students/:id', (req, res) => {
   const id = parseInt(req.params.id)+1;
+  const id_link = id-1;
   student = getUserFromId(id, (err, student) => {
     if (err) {
       res.send(err);
     } else {
-      res.render('student_details', { student, success: req.query.success });
+      res.render('student_details', { student, id_link, success: req.query.success });
     }
   });
 });
@@ -111,20 +112,20 @@ app.get('/students/:id/update', (req, res) => {
     if (err) {
       res.send(err);
     } else {
-      res.render('put_update', { student, success: req.query.success });
+      res.render('put_update', { student, success: req.query.success, id_link: id-1});
     }
   });
 });
 
 app.put('/students/:id/update', (req, res) => {
-  const id = parseInt(req.params.id)+1;
+  const id = parseInt(req.params.id);
   const {name, school} = req.body;
   updateUser(id, name, school, (err) => {
     if (err) {
       console.log(err);
-      res.redirect(`/students/${id-1}?success=false`);
+      res.json({ success: false, message: "Failed to update student.", error: err });
     } else {
-      res.redirect(`/students/${id-1}?success=true`);
+      res.json({ success: true, message: "Student updated successfully." });
     }
   });
 });

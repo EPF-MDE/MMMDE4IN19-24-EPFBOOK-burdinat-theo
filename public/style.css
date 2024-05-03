@@ -95,3 +95,11 @@ input[type="text"] {
   margin-bottom: 20px;
   width: 100%;
 }
+
+form#updateForm {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: auto;
+  padding : 20px;
+}

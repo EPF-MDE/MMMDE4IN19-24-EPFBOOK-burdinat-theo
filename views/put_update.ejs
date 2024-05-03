@@ -6,6 +6,7 @@
     <title><%= student.name %>'s page</title>
     <link rel="stylesheet" href="/normalize.css">
     <link rel="stylesheet" href="/style.css">
+    <script src="/put_update.js"></script>
 </head>
 <body>
     <header>
@@ -22,15 +23,8 @@
         </nav>
     </header>
     <main>
-        <h1>Student Details</h1>
-        <p><b>Name: </b><%= student.name %></p>
-        <p><b>School: </b><%= student.school %></p>
-        <br>
-        <button onclick="window.location.href='/students/<%= id_link %>/update'">Update with PUT method</button>
-        <br>
-        <form method="POST">
-            <br>
-            <label for="update"><b>Update the profile of the student: (POST method)</b></label>
+        <form id="updateForm" data-student-id=<%= id_link %>>
+            <h3>Update the profile of the student (PUT method):</h3>
             <br>
             <br>
             <label for="name">Name:</label>
@@ -41,12 +35,4 @@
             <br>
             <input type="submit" value="Update">
         </form>
-        <% if (success === 'true') { %>
-            <script>alert('Student updated successfully!');</script>
-        <% } else if (success === 'false') { %>
-            <script>alert('Student update failed!');</script>
-        <% } %>
-        <script>window.history.pushState({}, document.title, window.location.pathname);</script>
     </main>
-</body>
-</html>

@@ -44,7 +44,7 @@ app.get("/students", (req, res) => {
 });
 
 app.get("/students/create", (req, res) => {
-  res.render("create-students");
+  res.render("create-students", { model: "CSV" });
 });
 
 app.post("/students/create", (req, res) => {
@@ -63,12 +63,16 @@ app.get("/students/data", (req, res) => {
   res.render("students_data");
 });
 
+app.get("/students/create-in-db", (req, res) => {
+  res.render("create-students", { model: "MongoDB" });
+});
+
 app.post("/students/create-in-db", (req, res) => {
   const student = new StudentModel(req.body);
   student.save().then((result) => {
-    res.send("Student created successfully");
+    res.redirect("/students/create?created=1");
   }).catch((err) => {
-    res.send("Error creating student");
+    res.redirect("/students/create?error=1");
   });
 });
 
@@ -89,6 +93,30 @@ app.get('/students/:id', (req, res) => {
 });
 
 app.post('/students/:id', (req, res) => {
+  const id = parseInt(req.params.id)+1;
+  const {name, school} = req.body;
+  updateUser(id, name, school, (err) => {
+    if (err) {
+      console.log(err);
+      res.redirect(`/students/${id-1}?success=false`);
+    } else {
+      res.redirect(`/students/${id-1}?success=true`);
+    }
+  });
+});
+
+app.get('/students/:id/update', (req, res) => {
+  const id = parseInt(req.params.id)+1;
+  student = getUserFromId(id, (err, student) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.render('put_update', { student, success: req.query.success });
+    }
+  });
+});
+
+app.put('/students/:id/update', (req, res) => {
   const id = parseInt(req.params.id)+1;
   const {name, school} = req.body;
   updateUser(id, name, school, (err) => {

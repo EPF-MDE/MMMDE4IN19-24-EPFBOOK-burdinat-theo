@@ -50,7 +50,7 @@ app.get("/students/create", (req, res) => {
 app.post("/students/create", (req, res) => {
   console.log(req.body);
   const student = req.body;
-  storeStudentInCsvFile(student, (err, storeResult) => {
+  storeStudentInCsvFile(student, (err) => {
     if (err) {
       res.redirect("/students/create?error=1");
     } else {
@@ -69,11 +69,14 @@ app.get("/students/create-in-db", (req, res) => {
 
 app.post("/students/create-in-db", (req, res) => {
   const student = new StudentModel(req.body);
-  student.save().then((result) => {
-    res.redirect("/students/create?created=1");
-  }).catch((err) => {
-    res.redirect("/students/create?error=1");
-  });
+  student.save()
+    .then(() => {
+      res.redirect("/students/create?created=1");
+    })
+    .catch((err) => {
+      console.error(err);
+      res.redirect("/students/create?error=1");
+    });
 });
 
 app.get("/students/from-db", async (req, res) => {
@@ -84,7 +87,7 @@ app.get("/students/from-db", async (req, res) => {
 app.get('/students/:id', (req, res) => {
   const id = parseInt(req.params.id)+1;
   const id_link = id-1;
-  student = getUserFromId(id, (err, student) => {
+  getUserFromId(id, (err, student) => {
     if (err) {
       res.send(err);
     } else {
@@ -108,7 +111,7 @@ app.post('/students/:id', (req, res) => {
 
 app.get('/students/:id/update', (req, res) => {
   const id = parseInt(req.params.id)+1;
-  student = getUserFromId(id, (err, student) => {
+  getUserFromId(id, (err, student) => {
     if (err) {
       res.send(err);
     } else {

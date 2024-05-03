@@ -1,7 +1,35 @@
-<form method="POST">
-    <label for="name">Name</label>
-    <input type="text" name="name" required/>
-    <label for="school">School</label>
-    <input type="text" name="school" required />
-    <button type="submit">Add new student</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a student (CSV)</title>
+    <link rel="stylesheet" href="/normalize.css">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/create-students.js"></script>
+</head>
+<body>
+    <header>
+        <img src="/EPF Logo + Baseline Negatif sans Fond.png" alt="EPF Logo" id="logo">
+        <nav id="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/students">Students list (CSV)</a></li>
+                <li><a href="/students/create">Add a student (CSV)</a></li>
+                <li><a href="/students/data">Display some plots</a></li>
+                <li><a href="/students/from-db">Students list (MongoDB)</a></li>
+                <li><a href="/students/create-in-db">Add a student (MongoDB)</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <form method="POST" id="creation_form">
+            <label for="name">Name</label>
+            <input type="text" name="name" pattern="[^,]" required/><br><br>
+            <label for="school" pattern="[^,]">School</label>
+            <input type="text" name="school" required /><br><br>
+            <button type="submit">Add new student</button>
+        </form>
+    </main>
+</body>
+</html>

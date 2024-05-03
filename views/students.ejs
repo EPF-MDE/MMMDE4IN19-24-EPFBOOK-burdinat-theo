@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            Students (CSV)
+            Students (<%= model %>)
         </title>
         <link rel="stylesheet" href="/normalize.css">
         <link rel="stylesheet" href="/style.css">
@@ -27,14 +27,26 @@
         <main>
             <h1>Student list</h1> 
             <p class="long-text">
-                Here is a list of students from the CSV file. You can click on a student name to go to his profile (where you can update each student). You can also add a student by clicking on the button below. <br><br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis ullamcorper metus et maximus. Maecenas in magna ac felis finibus porta. Praesent tempus, tellus eu faucibus dapibus, orci eros imperdiet nisl, eget tempor urna arcu at felis. 
+                Here is a list of students from <%= model %>. 
+                <% if (model === 'CSV') { %>
+                    You can click on a student name to go to his profile (where you can update each student).
+                <% } %>
+                You can also add a student by clicking on the button below. <br><br> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lobortis ullamcorper metus et maximus. Maecenas in magna ac felis finibus porta. Praesent tempus, tellus eu faucibus dapibus, orci eros imperdiet nisl, eget tempor urna arcu at felis. 
             </p>
+            <% if (model === 'CSV') { %>
             <ul class="students"> 
-            <% students.forEach(function(student, index) { %> 
+            <% students.forEach(function(student, index) { %>
                 <li class="students"><a href="/students/<%= index %>"><%= student.name %></a> | <%= student.school %></li> 
             <%})%> 
             </ul>
-            <button id="create">Click here to add a student</button>
+            <% } else if (model === 'MongoDB') { %>
+            <ul class="students">
+            <% students.forEach(function(student) { %>
+                <li class="students"><%= student.name %> | <%= student.school %></li>
+            <%})%>
+            </ul>
+            <% } %>
+            <button id="create" data-model="<%= model %>">Click here to add a student</button>
         </main>
     </body>
 </html>

@@ -38,6 +38,7 @@ app.get("/students", (req, res) => {
     }
     res.render("students", {
       students,
+      model: "CSV"
     });
   });
 });
@@ -73,7 +74,7 @@ app.post("/students/create-in-db", (req, res) => {
 
 app.get("/students/from-db", async (req, res) => {
   const students = await StudentModel.find({}).exec();
-  res.send(students);
+  res.render('students', { students, model: "MongoDB" });
 });
 
 app.get('/students/:id', (req, res) => {

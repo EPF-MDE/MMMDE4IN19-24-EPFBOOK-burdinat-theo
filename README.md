@@ -4,7 +4,7 @@
 
 # EPFBook - Your Own Social Network
 
-EPFBook is a web-based social networking platform created as a project for the Web Programming course with Node.js, Express and MongoDB.
+EPFBook is a web-based social networking platform created as a project for the MDE Web Programming course with Node.js, Express and MongoDB.
 
 ## Table of contents
 
@@ -12,7 +12,13 @@ EPFBook is a web-based social networking platform created as a project for the W
 	* [Pre-requisites](#pre-requisites)
 	* [Setup](#setup)
 * [Usage](#usage)
+	* [Development mode](#development-mode)
+	* [Production mode](#production-mode)
+	* [Deploy EPFBOOK on a server](#deploy-epfbook-on-a-server)
 * [Features](#features)
+	* [API](#api)
+	* [Website](#website)
+	* [Other features](#other-features)
 * [Rick and Morty API Example](#rick-and-morty-api-example)
 	* [Documentation Reference](#documentation-reference)
 	* [The request](#the-request)
@@ -53,12 +59,96 @@ To install EPFBook, follow these steps:
    ```bash
    npm install
    ```
+
 EPFBook is now ready to run
 
 ## Usage
-...
+
+### Development mode
+To run EPFBook in development mode (Nodemon), follow these steps:
+
+1. Create or start the MongoDB server:
+   ```bash
+   npm run docker_create #If it has never been created before
+   ```
+   ```bash
+   npm run docker_start #If you just want to start the server
+   ```
+
+2. Run the application:
+   ```bash
+   npm run dev
+   ```
+
+3. Open a web browser and navigate to http://localhost:3000 to access the application.
+
+4. Access to the app with admin IDs:
+
+	**Username:** admin
+
+	**Password:** admin
+
+5. To exit MongoDB server:
+   ```bash
+   npm run docker_stop
+   ```
+
+The server will restart automatically on code update. You can stop the server using Ctrl+C.
+
+### Production mode
+To run EPFBook in production mode (PM2), follow these steps:
+
+1. Dowload PM2 (only the first time):
+   ```bash
+   npm i --save --global pm2
+   ```
+
+2. Create or start the MongoDB server:
+   ```bash
+   npm run docker_create #If it has never been created before
+   ```
+   ```bash
+   npm run docker_start #If you just want to start the server
+   ```
+
+3. Run the application:
+   ```bash
+   pm2 start app.js
+   ```
+
+4. Open a web browser and navigate to http://localhost:3000 to access the application.
+
+5. Access to the app with admin IDs:
+
+	**Username:** admin
+
+	**Password:** admin
+
+6. You can stop the app using:
+	```bash
+	pm2 stop app
+	```
+
+7. To exit MongoDB server:
+   ```bash
+   npm run docker_stop
+   ```
+
+The server will restart automatically in case of unexpected crash.
+
+### Deploy EPFBOOK on a server
+
+1. 
 
 ## Features
+
+### API
+...
+
+### Website
+...
+
+### Other features
 ...
 
 ## Rick and Morty API Example
@@ -142,3 +232,31 @@ We found that the character with ID 5 is **Jerry Smith** !
 	"created": "2017-11-04T19:26:56.301Z"
 }
    ```
+
+   
+## Features
+/!\ TO CHECK /!\
+- Home page
+- Students list from a CSV file - API / Web page
+- Student creation (and save in a CSV file) - API / Web page
+- Students list from a database - API -------- WEBPAGE A FAIRE
+- Student creation (and save in a database) - API -------- WEBPAGE A FAIRE
+- Nice responsive look (from normalize.css)
+- ESLint set up for clean code
+- Authentification (Basic, Multiple users, encrypted passwords)
+- Webpage with some graphs
+- Ready to deploy
+- A page per student
+- Update a student
+- Menu in the header
+- Affichage mobile
+- Beautiful CSS
+- Ex2 put request
+- All API endpoints
+- Handle the scenario where the id parameter does not match any student in thedetails view
+- ESLint
+- Expliquer le débugger node, les mots de passe chiffré (+comment ajouter des utilisateurs)
+
+/!\ TO DO /!\
+- Vérifier que le code run bien depuis la vm et ajouter les instructions ici
+- Comments

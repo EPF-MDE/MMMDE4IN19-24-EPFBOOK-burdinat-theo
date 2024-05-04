@@ -71,11 +71,11 @@ app.post("/students/create-in-db", (req, res) => {
   const student = new StudentModel(req.body);
   student.save()
     .then(() => {
-      res.redirect("/students/create?created=1");
+      res.redirect("/students/create-in-db?created=1");
     })
     .catch((err) => {
       console.error(err);
-      res.redirect("/students/create?error=1");
+      res.redirect("/students/create-in-db?error=1");
     });
 });
 

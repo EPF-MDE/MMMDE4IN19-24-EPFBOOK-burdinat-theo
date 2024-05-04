@@ -7,8 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "echo": "echo 'HELLO'",
     "dev": "nodemon -L app.js",
-    "docker": "docker run -d -p 27017:27017 -v ~/data:/data/db mongo",
-    "eslint": "eslint ."
+    "docker_create": "docker run -d -p 27017:27017 -v ~/data:/data/db --name mongo mongo:3.6.3",
+    "docker_start": "docker start mongo",
+    "docker_stop": "docker stop mongo",
+    "eslint": "eslint .",
+    "pm2_start": "pm2 start app.js",
+    "pm2_stop": "pm2 stop app"
   },
   "author": "",
   "license": "ISC",

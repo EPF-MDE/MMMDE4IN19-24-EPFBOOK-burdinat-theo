@@ -172,12 +172,45 @@ First 1 to 3 are to do only the first time.
 ## Features
 
 ### API
+
+#### GET requests
+...
+
+#### POST requests
+...
+
+#### PUT requests
 ...
 
 ### Website
+
+#### Home page
+...
+
+#### From CSV database
+...
+
+#### From MongoDB database
+...
+
+#### Data visualization page
+...
+
+#### Student details / Update students' data
+...
+
+#### Handle the scenario where the id parameter does not match any student in the details view
 ...
 
 ### Other features
+
+#### ESLint
+...
+
+#### Responsive
+...
+
+#### Basic Authentification
 ...
 
 ## Rick and Morty API Example
@@ -263,7 +296,6 @@ We found that the character with ID 5 is **Jerry Smith** !
    ```
 
    
-## Features
 /!\ TO CHECK /!\
 - Home page
 - Students list from a CSV file - API / Web page
@@ -282,10 +314,6 @@ We found that the character with ID 5 is **Jerry Smith** !
 - Beautiful CSS
 - Ex2 put request
 - All API endpoints
-- Handle the scenario where the id parameter does not match any student in thedetails view
+- Handle the scenario where the id parameter does not match any student in the details view
 - ESLint
 - Expliquer le débugger node, les mots de passe chiffré (+comment ajouter des utilisateurs)
-
-/!\ TO DO /!\
-- Vérifier que le code run bien depuis la vm et ajouter les instructions ici
-- Comments

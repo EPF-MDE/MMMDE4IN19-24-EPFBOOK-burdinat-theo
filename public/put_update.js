@@ -1,3 +1,4 @@
+// Permit to make a PUT request from the form to update a student
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById('updateForm');
     form.addEventListener('submit', function(event) {

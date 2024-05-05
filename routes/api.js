@@ -1,10 +1,12 @@
 const express = require('express');
 const { getFromCsvfile, storeStudentInCsvFile, getUserFromId, updateUser } = require('../csvfile_manipulation');
-const router = express.Router();
 const StudentModel = require('../models/Student');
 const mongoose = require('mongoose');
+
+const router = express.Router();
 mongoose.connect('mongodb://localhost:27017/epfbook');
 
+// Route to get all students from a CSV file
 router.get("/students", (req, res) => {
   getFromCsvfile("students", (err, students) => {
     if (err) {
@@ -14,7 +16,8 @@ router.get("/students", (req, res) => {
     res.send(students);
   });
 });
-  
+
+// Route to create a new student in the CSV file
 router.post("/students/create", (req, res) => {
   console.log(req.body);
   const student = req.body;
@@ -27,6 +30,7 @@ router.post("/students/create", (req, res) => {
   });
 });
 
+// Route to handle user login
 router.post("/login", (req, res) => {
   const token = "FOOBAR";
   const tokenCookie = {
@@ -39,6 +43,7 @@ router.post("/login", (req, res) => {
   console.log(req.cookies);
 });
 
+// Route to create a new student in the MongoDB database
 router.post("/students/create-in-db", (req, res) => {
   const student = new StudentModel(req.body);
   student.save()
@@ -51,11 +56,13 @@ router.post("/students/create-in-db", (req, res) => {
     });
 });
 
+// Route to get all students from the MongoDB database
 router.get("/students/from-db", async (req, res) => {
   const students = await StudentModel.find({}).exec();
   res.send(students);
 });
 
+// Route to get a specific student from the CSV file
 router.get('/students/:id', (req, res) => {
   const id = parseInt(req.params.id)+1;
   getUserFromId(id, (err, student) => {
@@ -67,6 +74,7 @@ router.get('/students/:id', (req, res) => {
   });
 });
 
+// Route to update a specific student in the CSV file
 router.post('/students/:id', (req, res) => {
   const id = parseInt(req.params.id)+1;
   const {name, school} = req.body;
@@ -80,6 +88,7 @@ router.post('/students/:id', (req, res) => {
   });
 });
 
+// Route to update a specific student in the CSV file using PUT method
 router.put('/students/:id/update', (req, res) => {
   const id = parseInt(req.params.id)+1;
   const {name, school} = req.body;

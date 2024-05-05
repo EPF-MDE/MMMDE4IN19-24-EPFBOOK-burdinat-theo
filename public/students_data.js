@@ -1,3 +1,4 @@
+// Permits to display the different graphs
 document.addEventListener("DOMContentLoaded", function(){
     d3.select("body").style("background-color", "#e0f0f5");
     d3.csv("/covid-19-students-delhi-1.csv").then((data) => {

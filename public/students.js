@@ -1,3 +1,4 @@
+// Permit to move on the student creation page from the student list page
 document.addEventListener("DOMContentLoaded", function(){
     let button = document.querySelector('button#create');
     button.addEventListener('click', function(){

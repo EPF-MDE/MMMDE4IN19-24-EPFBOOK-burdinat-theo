@@ -1,3 +1,4 @@
+// Permit to show if a student has benn well created or not
 document.addEventListener("DOMContentLoaded", function() {
     const urlParams = new URLSearchParams(window.location.search);
     let showAlert = false;

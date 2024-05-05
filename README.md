@@ -30,7 +30,7 @@ EPFBook is a web-based social networking platform created as a project for the M
 		* [ESLint](#eslint)
 		* [Responsive](#responsive)
 		* [Handle the scenario where the id parameter does not match any student in the details view](#handle-the-scenario-where-the-id-parameter-does-not-match-any-student-in-the-details-view)
-		* [Basic Authentification (web/api/add users)](#basic-authentification-webapiadd-users)
+		* [Basic Authentification](#basic-authentification)
 * [Rick and Morty API Example](#rick-and-morty-api-example)
 	* [Documentation Reference](#documentation-reference)
 	* [The request](#the-request)

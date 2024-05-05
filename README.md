@@ -29,9 +29,8 @@ EPFBook is a web-based social networking platform created as a project for the M
 	* [Other features](#other-features)
 		* [ESLint](#eslint)
 		* [Responsive](#responsive)
-		* [Basic Authentification (web/api/add users)](#basic-authentification-webapiadd-users)
 		* [Handle the scenario where the id parameter does not match any student in the details view](#handle-the-scenario-where-the-id-parameter-does-not-match-any-student-in-the-details-view)
-
+		* [Basic Authentification (web/api/add users)](#basic-authentification-webapiadd-users)
 * [Rick and Morty API Example](#rick-and-morty-api-example)
 	* [Documentation Reference](#documentation-reference)
 	* [The request](#the-request)
@@ -418,26 +417,3 @@ We found that the character with ID 5 is **Jerry Smith** !
 	"created": "2017-11-04T19:26:56.301Z"
 }
    ```
-
-   
-/!\ TO CHECK /!\
-- Home page
-- Students list from a CSV file - API / Web page
-- Student creation (and save in a CSV file) - API / Web page
-- Students list from a database - API -------- WEBPAGE A FAIRE
-- Student creation (and save in a database) - API -------- WEBPAGE A FAIRE
-- Nice responsive look (from normalize.css)
-- ESLint set up for clean code
-- Authentification (Basic, Multiple users, encrypted passwords)
-- Webpage with some graphs
-- Ready to deploy
-- A page per student
-- Update a student
-- Menu in the header
-- Affichage mobile
-- Beautiful CSS
-- Ex2 put request
-- All API endpoints
-- Handle the scenario where the id parameter does not match any student in the details view
-- ESLint
-- Expliquer le débugger node, les mots de passe chiffré (+comment ajouter des utilisateurs)

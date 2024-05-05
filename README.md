@@ -21,7 +21,17 @@ EPFBook is a web-based social networking platform created as a project for the M
 		* [POST requests](#post-requests)
 		* [PUT requests](#put-requests)
 	* [Website](#website)
+		* [Home page](#home-page)
+		* [From CSV database](#from-csv-database)
+		* [From MongoDB database](#from-mongodb-database)
+		* [Data visualization page](#data-visualization-page)
+		* [Student details / Update student's data](#student-details--update-students-data)
 	* [Other features](#other-features)
+		* [ESLint](#eslint)
+		* [Responsive](#responsive)
+		* [Basic Authentification (web/api/add users)](#basic-authentification-webapiadd-users)
+		* [Handle the scenario where the id parameter does not match any student in the details view](#handle-the-scenario-where-the-id-parameter-does-not-match-any-student-in-the-details-view)
+
 * [Rick and Morty API Example](#rick-and-morty-api-example)
 	* [Documentation Reference](#documentation-reference)
 	* [The request](#the-request)
@@ -238,33 +248,94 @@ PUT http://localhost:3000/api/students/:id
 ### Website
 
 #### Home page
-...
+
+> http://localhost:3000/
+
+This page provide a nice homepage with a header that display a menu to navigate through the app. This menu is available from all the different pages.
 
 #### From CSV database
-...
+
+##### Students list
+
+> http://localhost:3000/students
+
+This page display all the students stored in the CSV file. You can click on a student name to go to his details page, or click on the button at the end of the list to add new students.
+
+##### Student creation
+
+> http://localhost:3000/students/create
+
+This page is a student creation form. You can type information about the student you want to add to the CSV database, then click on the "Add" button. A popup will tell you if everything worked well.
 
 #### From MongoDB database
-...
+
+##### Students list
+
+> http://localhost:3000/students/from-db
+
+This page display all the students stored in the MongoDB database. You can click on the button at the end of the list to add new students.
+
+##### Student creation
+
+> http://localhost:3000/students/create-in-db
+
+This page is a student creation form. You can type information about the student you want to add to the MongoDB database, then click on the "Add" button. A popup will tell you if everything worked well.
 
 #### Data visualization page
-...
 
-#### Student details / Update students' data
-...
+> http://localhost:3000/students/data
 
-#### Handle the scenario where the id parameter does not match any student in the details view
-...
+This page allows you to display some interesting plots about students' stress busters and try to show the best stress busters to avoid health issues during the lockdown (The top one seems to be online gaming).
+
+#### Student details / Update student's data
+
+> http://localhost:3000/students/:id
+
+This page display all the data of the id's student. On this page, you can update the profile of the student using the form, pre-filled with student's information and clicking on the update button. This method is using a POST request.
+
+If you prefere to use a PUT request, you can click on the button "Update with PUT method", that will redirect you to the next page:
+
+> http://localhost:3000/students/:id/update
+
+On this page, you have an update form prefilled with student's information. When you click on the "Update" button, data of the student will be updated using a PUT request.
 
 ### Other features
 
 #### ESLint
-...
+
+This project use ESLint to maintain a good code quality. You can check the code quality using the following command:
+```bash
+npm run eslint
+```
 
 #### Responsive
-...
 
-#### Basic Authentification (web/api/add users)
-...
+The application is responsive and can be used on mobile devices. All not essential long paragraphs are removed on the mobile version, and the menu and the different forms will adapt to the size of your device.
+
+#### Handle the scenario where the id parameter does not match any student in the details view
+
+If you try to access a student's details page for a non-existing id, you will be redirected to a "Student not found" page.
+
+#### Basic Authentification
+
+The app is using basic authentification on all its pages. You can use the app using the following credentials right after the setup:
+
+| Username | Password |
+|----------|----------|
+| admin    | admin    |
+
+You can add new users to the app by adding them in the *users.csv* file. As passwords are encrypted you have to encrypt your password before adding it to the file. To do so, run the hashPassword script:
+
+```bash
+./scripts/hashPassword.js
+```
+
+To connect on the API, you have to use a basic authentification Authorizer header. To know what you have to put inside, run these line and copy the result:
+
+```js
+node //Switch to node terminal
+> "Basic " + Buffer.from("username:password").toString("base64");
+```
 
 ## Rick and Morty API Example
 

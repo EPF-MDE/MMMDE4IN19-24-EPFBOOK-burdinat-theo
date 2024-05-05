@@ -174,13 +174,63 @@ First 1 to 3 are to do only the first time.
 ### API
 
 #### GET requests
-...
+
+##### Get the data from all students stored in the CSV file
+
+```bash	
+GET http://localhost:3000/api/students
+```
+
+##### Get the data from all students stored in MongoDB
+
+```bash
+GET http://localhost:3000/api/students/from-db
+```
+
+##### Get the data from a specific student stored in the CSV
+
+```bash
+GET http://localhost:3000/api/students/:id
+```
 
 #### POST requests
-...
+
+>In this section you should use json format to input student's data :
+```json
+{"name": "Théo BURDINAT", "school": "EPF"}
+```
+
+##### Add a student to the CSV database
+
+```bash	
+POST http://localhost:3000/api/students/create
+```
+
+##### Add a student to the MongoDB database
+
+```bash	
+POST http://localhost:3000/api/students/create-in-db
+```
+
+##### Update student's info in the CSV
+
+```bash	
+POST http://localhost:3000/api/students/:id
+```
+
+#### Login endpoint to try setting cookies after login
+
+```bash	
+POST http://localhost:3000/api/login
+```
 
 #### PUT requests
-...
+
+##### Update student's info in the CSV
+
+```bash	
+PUT http://localhost:3000/api/students/:id
+```
 
 ### Website
 
@@ -210,7 +260,7 @@ First 1 to 3 are to do only the first time.
 #### Responsive
 ...
 
-#### Basic Authentification
+#### Basic Authentification (web/api/add users)
 ...
 
 ## Rick and Morty API Example

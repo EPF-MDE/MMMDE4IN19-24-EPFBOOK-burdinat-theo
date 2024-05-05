@@ -113,7 +113,7 @@ To run EPFBook in production mode (PM2), follow these steps:
 
 3. Run the application:
    ```bash
-   pm2 start app.js
+   npm run pm2_start
    ```
 
 4. Open a web browser and navigate to http://localhost:3000 to access the application.
@@ -126,7 +126,7 @@ To run EPFBook in production mode (PM2), follow these steps:
 
 6. You can stop the app using:
 	```bash
-	pm2 stop app
+	npm run pm2_stop
 	```
 
 7. To exit MongoDB server:
@@ -138,7 +138,36 @@ The server will restart automatically in case of unexpected crash.
 
 ### Deploy EPFBOOK on a server
 
-1. 
+First 1 to 3 are to do only the first time.
+
+1. Install NGINX - it will permits to set up a reverse proxy:
+   ```bash
+   sudo apt-get install nginx
+   ```
+
+2. Update NGINX configuration to redirect HTTP requests on port 80 to port 3000:
+	```bash
+	sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backupsudo 
+	nano /etc/nginx/sites-available/default
+	```
+	Content to update:
+	```
+	server {
+		listen 80; 
+		server_name p3000; 
+		location / { 
+			proxy_pass http://0.0.0.0:3000; 
+			include /etc/nginx/proxy_params; 
+		}
+	}
+	```
+
+3. Restart NGINX:
+	```bash
+	sudo systemctl restart nginx
+	```
+
+4. Then you can run the app following [dev](#development-mode) or [prod](#production-mode) modes, and connect you to the app using the IP address of your server.
 
 ## Features
 
